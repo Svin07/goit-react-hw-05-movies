@@ -17,3 +17,24 @@ export const getMoviesByTrending = async () => {
   const { data } = await axios(`/trending/movie/day?api_key=${API_KEY}`);
   return data;
 };
+
+// Запит для отримання детальної інформації про фільм
+
+export const getDetailsMoviesById = async id => {
+  const { data } = await axios(`/movie/${id}?api_key=${API_KEY}`);
+  return data;
+};
+
+// Запит для отримання детальної інформації про акторів
+
+export const getDetailsMoviesCast = async id => {
+  const { data } = await axios(`/movie/${id}/credits?api_key=${API_KEY}`);
+  return data;
+};
+
+// Запит для отримання детальної інформації про огляди
+
+export const getDetailsMoviesReviews = async id => {
+  const { data } = await axios(`/movie/${id}/reviews?api_key=${API_KEY}`);
+  return data;
+};

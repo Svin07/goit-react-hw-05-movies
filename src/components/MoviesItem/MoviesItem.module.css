@@ -19,3 +19,7 @@
   transform: scale(1.03);
   cursor: zoom-in;
 }
+
+.linkDetails {
+  color: blue;
+}

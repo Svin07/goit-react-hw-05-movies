@@ -45,7 +45,6 @@ export default function MoviesList({ searchQuery, fetchFunction }) {
             <MoviesItem
               key={movie.id}
               id={movie.id}
-              backdrop={movie.backdrop_path}
               image={movie.poster_path}
               title={movie.title}
               rating={movie.vote_average}

@@ -1,0 +1,29 @@
+.movieCard {
+  margin-top: 5px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  background-color: #8d9ef5;
+  padding: 10px;
+  display: flex;
+}
+.movieImg {
+  max-width: 400px;
+  height: 100%;
+}
+.movieDescr {
+  padding: 10px;
+}
+.title {
+  text-decoration: underline;
+}
+.movieGenres {
+  text-decoration: underline;
+}
+.movieOverview {
+  text-decoration: underline;
+}
+.additionalInformation {
+  border-bottom: 2px solid;
+  background-color: #8d9ef5;
+  padding: 10px;
+}
