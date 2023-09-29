@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 import css from './MoviesList.module.css';
 import Loader from '../../components/Loader/Loader';
 import MoviesItem from '../../components/MoviesItem/MoviesItem';
-import { getMoviesBySearch } from 'API/API/api';
+// import { getMoviesBySearch } from 'API/API/api';
 
-export default function MoviesList({ searchQuery }) {
+export default function MoviesList({ searchQuery, fetchFunction }) {
   const [isLoading, setIsLoading] = useState(false);
   //   const [totalPages, setTotalPages] = useState(0);
   const [error, setError] = useState('');
@@ -19,7 +19,7 @@ export default function MoviesList({ searchQuery }) {
     const fetchMovies = async () => {
       try {
         setIsLoading(true);
-        const data = await getMoviesBySearch(searchQuery);
+        const data = await fetchFunction(searchQuery);
         const { results } = data;
 
         setMovies(prevMovies => [...prevMovies, ...results]);
@@ -33,7 +33,7 @@ export default function MoviesList({ searchQuery }) {
 
     fetchMovies();
     setMovies([]);
-  }, [searchQuery]);
+  }, [searchQuery, fetchFunction]);
 
   return (
     <>

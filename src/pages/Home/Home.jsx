@@ -1,7 +1,15 @@
+// import { useState } from 'react';
+import { getMoviesByTrending } from 'API/API/api';
+import MoviesList from '../../components/MoviesList/MoviesList';
+
 const Home = () => {
+  const searchQuery = true;
   return (
     <div>
-      <h1>Home page</h1>
+      <MoviesList
+        fetchFunction={getMoviesByTrending}
+        searchQuery={searchQuery}
+      />
     </div>
   );
 };

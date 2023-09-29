@@ -3,7 +3,7 @@ import { useState } from 'react';
 // import Header from '../../components/Header/Header';
 // import Loader from '../../components/Loader/Loader';
 import MoviesList from '../../components/MoviesList/MoviesList';
-// import { getMoviesBySearch } from 'API/API/api';
+import { getMoviesBySearch } from 'API/API/api';
 import Search from '../../components/Search/Search';
 
 export default function Movies() {
@@ -18,7 +18,10 @@ export default function Movies() {
         <Search handlySetSearchQuery={handlySetSearchQuery} />
       </div>
       <div>
-        <MoviesList searchQuery={searchQuery} />
+        <MoviesList
+          searchQuery={searchQuery}
+          fetchFunction={getMoviesBySearch}
+        />
       </div>
     </>
   );
