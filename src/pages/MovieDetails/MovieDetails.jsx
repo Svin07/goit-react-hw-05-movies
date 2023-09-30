@@ -1,27 +1,38 @@
 // компонент MovieDetails, сторінка пошуку детальної інформації про фільм
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import {
+  NavLink,
+  Outlet,
+  useParams,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import css from './MovieDetails.module.css';
+import styled from 'styled-components';
 import Loader from '../../components/Loader/Loader';
 
-import {
-  getDetailsMoviesById,
-  //   getDetailsMoviesCast,
-  //   getDetailsMoviesReviews,
-} from 'API/API/api';
+import { getDetailsMoviesById } from 'API/API/api';
+
+const defaultImg =
+  'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
+
+const StyledLink = styled(NavLink)`
+  color: white;
+
+  &.active {
+    color: orange;
+  }
+`;
 
 export default function MovieDetails() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [moviesObj, setMoviesObj] = useState({});
+  const [moviesObj, setMoviesObj] = useState(null);
 
   const { id } = useParams();
   const basicUrlForImage = 'https://image.tmdb.org/t/p/w500';
-  const defaultImg =
-    'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
-
-  const { title, genres, overview, poster_path, release_date, vote_average } =
-    moviesObj;
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchMoviesDetails = async () => {
@@ -39,18 +50,30 @@ export default function MovieDetails() {
     fetchMoviesDetails();
   }, [id]);
 
-  const genresName = genres.map(genre => genre.name).join(' ');
+  const hendleClickBackBtn = () => {
+    navigate(location.state);
+  };
 
-  console.log(genresName);
-  console.log(moviesObj);
+  if (!moviesObj) return;
+  const { title, genres, overview, poster_path, release_date, vote_average } =
+    moviesObj;
+
+  const genresName = genres.map(genre => genre.name).join(' ');
 
   return (
     <>
       {isLoading && <Loader />}
       {error && <h2>{error}</h2>}
-      <button type="button" className="">
-        Go back
-      </button>
+      <div className={css.body}>
+        <button
+          type="button"
+          onClick={hendleClickBackBtn}
+          className={css.closingbutton}
+        >
+          <span>Go back</span>
+        </button>
+      </div>
+
       <section className={css.movieCard}>
         <img
           className={css.movieImg}
@@ -72,13 +95,24 @@ export default function MovieDetails() {
         <h5>Additional Information</h5>
         <ul>
           <li>
-            <a href="/README.md">Cast</a>
+            <StyledLink
+              to={`/movies/${id.toString()}/cast`}
+              state={location.state}
+            >
+              Cast
+            </StyledLink>
           </li>
           <li>
-            <a href="/README.md">Reviews</a>
+            <StyledLink
+              to={`/movies/${id.toString()}/reviews`}
+              state={location.state}
+            >
+              Reviews
+            </StyledLink>
           </li>
         </ul>
       </section>
+      <Outlet />
     </>
   );
 }

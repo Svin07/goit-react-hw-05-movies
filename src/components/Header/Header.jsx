@@ -1,14 +1,23 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import css from './Header.module.css';
+import styled from 'styled-components';
+
+const StyledLink = styled(NavLink)`
+  color: white;
+
+  &.active {
+    color: orange;
+  }
+`;
 
 export default function Header() {
   return (
     <header className={css.header}>
-      <NavLink to="/">
+      <Link to="/">
         <h2>*GREAT LOGO*</h2>
-      </NavLink>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="movies">Movies</NavLink>
+      </Link>
+      <StyledLink to="/">Home</StyledLink>
+      <StyledLink to="movies">Movies</StyledLink>
     </header>
   );
 }

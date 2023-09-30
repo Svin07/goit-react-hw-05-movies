@@ -1,17 +1,19 @@
-import { useState } from 'react';
-
 import css from './Search.module.css';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Search({ handlySetSearchQuery }) {
-  const [value, setValue] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const query = searchParams.get('search');
 
   const handlyChange = ({ target: { value } }) => {
-    setValue(value);
+    value ? setSearchParams({ search: value }) : setSearchParams({});
   };
 
   const onSubmit = e => {
     e.preventDefault();
-    handlySetSearchQuery(value);
+
+    handlySetSearchQuery(query);
   };
 
   return (
@@ -26,7 +28,7 @@ export default function Search({ handlySetSearchQuery }) {
           type="text"
           onChange={handlyChange}
           placeholder="Search movies"
-          value={value}
+          value={query}
         />
       </form>
     </div>
