@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Loader from '../../components/Loader/Loader';
 import MoviesList from '../../components/MoviesList/MoviesList';
@@ -10,24 +10,24 @@ export default function Movies() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [movies, setMovies] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchParams] = useSearchParams();
+  // const [searchQuery, setSearchQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const query = searchParams.get('search');
 
-  const ref = useRef(query);
+  // const ref = useRef(query);
+
+  // useEffect(() => {
+  //   ref.current && setSearchQuery(ref.current);
+  // }, []);
 
   useEffect(() => {
-    ref.current && setSearchQuery(ref.current);
-  }, []);
-
-  useEffect(() => {
-    if (!searchQuery) return;
+    if (!query) return;
 
     const fetchMovies = async () => {
       try {
         setIsLoading(true);
-        const data = await getMoviesBySearch(searchQuery);
+        const data = await getMoviesBySearch(query);
         const { results } = data;
 
         setMovies(results);
@@ -40,10 +40,10 @@ export default function Movies() {
 
     fetchMovies();
     setMovies([]);
-  }, [searchQuery]);
+  }, [query]);
 
   const handlySetSearchQuery = value => {
-    setSearchQuery(value);
+    setSearchParams({ query: value });
   };
   return (
     <>

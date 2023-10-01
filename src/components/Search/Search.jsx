@@ -1,18 +1,19 @@
+import { useState } from 'react';
 import css from './Search.module.css';
 import { useSearchParams } from 'react-router-dom';
 
 export default function Search({ handlySetSearchQuery }) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState('');
 
-  const query = searchParams.get('search');
+  // const query = searchParams.get('search');
 
   const handlyChange = ({ target: { value } }) => {
-    value ? setSearchParams({ search: value }) : setSearchParams({});
+    value && setQuery(value);
   };
 
   const onSubmit = e => {
     e.preventDefault();
-
+    setQuery(e.target.value);
     handlySetSearchQuery(query);
   };
 
