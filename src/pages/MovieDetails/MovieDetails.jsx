@@ -1,5 +1,6 @@
 // компонент MovieDetails, сторінка пошуку детальної інформації про фільм
 import { useState, useEffect } from 'react';
+import { Suspense } from 'react';
 import {
   NavLink,
   Outlet,
@@ -112,7 +113,10 @@ export default function MovieDetails() {
           </li>
         </ul>
       </section>
-      <Outlet />
+
+      <Suspense fallback={'Loading...'}>
+        <Outlet />
+      </Suspense>
     </>
   );
 }
