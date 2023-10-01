@@ -35,18 +35,19 @@ export default function MovieDetails() {
     <div>
       {isLoading && <Loader />}
       {error && <h2>{error}</h2>}
-      <ul>
-        {results.length < 1 ? (
-          <h3>No reviews found</h3>
-        ) : (
-          results.map(({ author, content }) => (
-            <li key={author}>
-              <h3>Author: {author}</h3>
-              <p>{content}</p>
+
+      {results.length < 1 ? (
+        <h3>No reviews found</h3>
+      ) : (
+        <ul>
+          {results.map(result => (
+            <li key={result.author}>
+              <h3>{result.author}</h3>
+              <p>{result.content}</p>
             </li>
-          ))
-        )}
-      </ul>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
