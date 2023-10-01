@@ -1,5 +1,5 @@
 // компонент MovieDetails, сторінка пошуку детальної інформації про фільм
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Suspense } from 'react';
 import {
   NavLink,
@@ -34,6 +34,7 @@ export default function MovieDetails() {
   const basicUrlForImage = 'https://image.tmdb.org/t/p/w500';
   const location = useLocation();
   const navigate = useNavigate();
+  const titleRef = useRef();
 
   useEffect(() => {
     const fetchMoviesDetails = async () => {
@@ -53,6 +54,13 @@ export default function MovieDetails() {
 
   const hendleClickBackBtn = () => {
     navigate(location.state);
+  };
+
+  const handleBackClick = () => {
+    titleRef.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   };
 
   if (!moviesObj) return;
@@ -97,6 +105,8 @@ export default function MovieDetails() {
         <ul>
           <li>
             <StyledLink
+              ref={titleRef}
+              onClick={handleBackClick}
               to={`/movies/${id.toString()}/cast`}
               state={location.state}
             >

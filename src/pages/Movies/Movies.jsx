@@ -13,7 +13,7 @@ export default function Movies() {
   // const [searchQuery, setSearchQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const query = searchParams.get('search');
+  const query = searchParams.get('query');
 
   // const ref = useRef(query);
 

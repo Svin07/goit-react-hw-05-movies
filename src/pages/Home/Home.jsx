@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Loader from '../../components/Loader/Loader';
 import { getMoviesByTrending } from 'API/API/api';
 import MoviesList from '../../components/MoviesList/MoviesList';
+import css from './Home.module.css';
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +34,7 @@ const Home = () => {
     <>
       <div>{isLoading && <Loader />}</div>
       {error && <h2>{error}</h2>}
-      <div>
+      <div className={css.pageBc}>
         <MoviesList movies={movies} />
       </div>
     </>
