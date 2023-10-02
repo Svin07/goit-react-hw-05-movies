@@ -8,15 +8,12 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [movies, setMovies] = useState([]);
-  const searchQuery = true;
 
   useEffect(() => {
-    if (!searchQuery) return;
-
     const fetchMovies = async () => {
       try {
         setIsLoading(true);
-        const data = await getMoviesByTrending(searchQuery);
+        const data = await getMoviesByTrending();
         const { results } = data;
 
         setMovies(results);
@@ -29,7 +26,7 @@ const Home = () => {
 
     fetchMovies();
     setMovies([]);
-  }, [searchQuery]);
+  }, []);
   return (
     <>
       <div>{isLoading && <Loader />}</div>
