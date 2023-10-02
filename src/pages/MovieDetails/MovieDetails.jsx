@@ -107,17 +107,14 @@ export default function MovieDetails() {
             <StyledLink
               ref={titleRef}
               onClick={handleBackClick}
-              to={`/movies/${id.toString()}/cast`}
+              to={`cast`}
               state={location.state}
             >
               Cast
             </StyledLink>
           </li>
           <li>
-            <StyledLink
-              to={`/movies/${id.toString()}/reviews`}
-              state={location.state}
-            >
+            <StyledLink to={`reviews`} state={location.state}>
               Reviews
             </StyledLink>
           </li>

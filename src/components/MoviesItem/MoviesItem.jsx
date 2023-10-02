@@ -19,7 +19,7 @@ export default function MoviesItem({ image, title, rating, id }) {
       </div>
       <h2>{title}</h2>
       <h3>Рейтинг ☆ {rating}</h3>
-      <Link className={css.linkDetails} to={id.toString()} state={location}>
+      <Link className={css.linkDetails} to={`/movies/${id}`} state={location}>
         Details
       </Link>
     </li>
